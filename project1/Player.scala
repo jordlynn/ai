@@ -8,11 +8,11 @@ class Player (algorithmType: String) {
     var boardStates = ListBuffer(Array.ofDim[Int](3,3))
 
     def PrintGameState () = {
-        for( k <- 0 until boardStates.size) yield {
+        for( k <- 0 until boardStates.size)  {
             for(
                 i <- 0 until 3;
                 j <- 0 until 3
-            ) yield {
+            )  {
                     print (boardStates(k)(i)(j))
                     if (j == 2) println()
                 }
@@ -21,7 +21,7 @@ class Player (algorithmType: String) {
     }
 
     def BreadthFirstSearch() = {
-        boardStates += Puzzel.CopyBoard()
+        boardStates += Puzzel.TileBoard.map(_.clone)
         println("========")
         PrintGameState()
         println("========")

@@ -1,0 +1,50 @@
+\documentclass[12pt,fleqn,leqno,letterpaper]{article}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage[margin=1in]{geometry}
+\pagestyle{fancy}
+\fancyhead{}
+\setlength{\headheight}{20pt} 
+\rhead{Jordan Lynn\\CS 470, Project 1a}
+
+
+\begin{document}
+Following is the program running, note that the board only starts 1 move from the solution. I play with it a bit then solve.
+\begin{lstlisting}
+Current position:
+1 2
+345
+678
+Your move: 3
+Current position:
+12 
+345
+678
+Your move: 6 
+Current position:
+125
+34 
+678
+Your move: 3
+Current position:
+12 
+345
+678
+Your move: 2
+Current position:
+1 2
+345
+678
+Your move: 1
+ 12
+345
+678
+Solved!
+\end{lstlisting}
+Now the scala code:
+Game.scala:
+\lstinputlisting[language=Scala, frame=single, breaklines=true]{../project1/game.scala}
+Puzzel.scala
+
+\lstinputlisting[language=Scala, frame=single, breaklines=true]{../project1/Puzzel.scala}
+\end{document}

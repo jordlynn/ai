@@ -17,6 +17,17 @@ object Puzzel {
 
     }
 
+    RandomizeTable()
+
+    /* RandomizeTable() Doesn't actuall randomize table, because it's possible
+     * to put together a table that isn't solvable. This just
+     * moves the tiles around a bunch.
+     */
+    private def RandomizeTable() = {
+        TileBoard(0)(0) = 1
+        TileBoard(0)(1) = 0
+    }
+
     /* SanityCheck() just makes sure the user made a valid choice */
     private def SanityCheck (tileChoice: Int): Double = {
         var xVal: Int = 0
@@ -70,6 +81,10 @@ object Puzzel {
         sqrt(pow((dxVal - xVal),2) + pow((dyVal - yVal),2)) // Calculate distance
     }
 
+    /* SearchArray(INT) will find the position of a given
+     * tile in the board to get the coordinates, 
+     * returning the 2 tuple of the coords.
+     */
     private def searchArrays(lookup: Int ) =
         for {
             i <- 0 until TileBoard.size
@@ -77,6 +92,10 @@ object Puzzel {
             if TileBoard(i)(j) == lookup
       } yield (i, j)
 
+      /* MoveTile(INT) takes in a tile to
+       * move and checks the move is valid
+       * and updates the board with the move.
+       */
     def MoveTile (tile: Int): Unit = {
         
         if (SanityCheck(tile) > 1) { // Check for valid tile move
@@ -109,11 +128,15 @@ object Puzzel {
         }
     }
 
+    /* isSolved() will return true if the
+     * puzzel is solved
+     */
     def isSolved () : Boolean = {
-        if (Solution.sameElements(TileBoard)) return true
+        if (Solution.deep == TileBoard.deep) return true
         else return false
     }
 
+    /* Prints the board! */
     def PrintBoard () = {
         for (
             i <- 0 until 3;
@@ -124,4 +147,5 @@ object Puzzel {
             if(j == 2) println()
         }
     }
+
 }

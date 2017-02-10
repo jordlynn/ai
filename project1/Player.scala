@@ -1,17 +1,36 @@
 package player
 import puzzel.Puzzel
+import scala.collection.mutable.ListBuffer
 
 class Player (algorithmType: String) {
     var Algorithm = algorithmType
-    var closedList: List[Int] = List() // start empty
+    var closedMoveList: List[Int] = List() // start empty
+    var boardStates = ListBuffer(Array.ofDim[Int](3,3))
+
+    def PrintGameState () = {
+        for( k <- 0 until boardStates.size) yield {
+            for(
+                i <- 0 until 3;
+                j <- 0 until 3
+            ) yield {
+                    print (boardStates(k)(i)(j))
+                    if (j == 2) println()
+                }
+            println()
+        }
+    }
 
     def BreadthFirstSearch() = {
+        boardStates += Puzzel.CopyBoard()
+        println("========")
+        PrintGameState()
+        println("========")
         var zeroTuple = FindZero(Puzzel.TileBoard)
         var zeroNumberedPosition = ConvertCord(zeroTuple(0)._1, zeroTuple(0)._2)
         var neighbors = validneighbors(zeroTuple(0)._1, zeroTuple(0)._2)
-        closedList = neighbors.map(x => ConvertCord(x(0), x(1)))
-        closedList = closedList.filter(_ > 0)
-        
+        closedMoveList = neighbors.map(x => ConvertCord(x(0), x(1)))
+        closedMoveList = closedMoveList.filter(_ > 0)
+
     }
 
     /* Note these aren't sanity checked! */

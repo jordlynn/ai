@@ -17,7 +17,7 @@ object Puzzel {
 
     }
 
-    RandomizeTable()
+    RandomizeTable() 
 
     /* RandomizeTable() Doesn't actuall randomize table, because it's possible
      * to put together a table that isn't solvable. This just
@@ -119,12 +119,12 @@ object Puzzel {
             case 6 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(1)(2)
                         TileBoard(1)(2) = 0 }
 
-            case 7 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(1)(0)
-                        TileBoard(1)(0) = 0 }
-            case 8 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(1)(1)
-                        TileBoard(1)(1) = 0 }
-            case 9 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(1)(2)
-                        TileBoard(1)(2) = 0 }
+            case 7 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(2)(0)
+                        TileBoard(2)(0) = 0 }
+            case 8 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(2)(1)
+                        TileBoard(2)(1) = 0 }
+            case 9 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(2)(2)
+                        TileBoard(2)(2) = 0 }
         }
     }
 
@@ -147,5 +147,7 @@ object Puzzel {
             if(j == 2) println()
         }
     }
+
+    def CopyBoard () = { TileBoard.clone}
 
 }

@@ -97,7 +97,6 @@ object Puzzel {
        * and updates the board with the move.
        */
     def MoveTile (tile: Int): Unit = {
-        
         if (SanityCheck(tile) > 1) { // Check for valid tile move
                 println("ERROR invalid move!")
                 return 
@@ -128,6 +127,41 @@ object Puzzel {
         }
     }
 
+
+    def FindChildren (tile: Int): Array[Array[Int]] = {
+        var TmpTileBoard = TileBoard.map(_.clone)
+        if (SanityCheck(tile) > 1) { // Check for valid tile move
+                println("ERROR invalid move: " + tile)
+                PrintBoard()
+                return Array.empty
+            } 
+        val tmpCord = searchArrays(0) // Look for zero tile, our empty space
+        
+        tile match {
+            case 1 => { TmpTileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TmpTileBoard(0)(0)
+                        TmpTileBoard(0)(0) = 0 }
+            case 2 => { TmpTileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TmpTileBoard(0)(1)
+                        TmpTileBoard(0)(1) = 0 }
+            case 3 => { TmpTileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TmpTileBoard(0)(2)
+                        TmpTileBoard(0)(2) = 0 }
+
+            case 4 => { TmpTileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TmpTileBoard(1)(0)
+                        TmpTileBoard(1)(0) = 0 }
+            case 5 => { TmpTileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TmpTileBoard(1)(1)
+                        TmpTileBoard(1)(1) = 0 }
+            case 6 => { TmpTileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TmpTileBoard(1)(2)
+                        TmpTileBoard(1)(2) = 0 }
+
+            case 7 => { TmpTileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TmpTileBoard(2)(0)
+                        TmpTileBoard(2)(0) = 0 }
+            case 8 => { TmpTileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TmpTileBoard(2)(1)
+                        TmpTileBoard(2)(1) = 0 }
+            case 9 => { TmpTileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TmpTileBoard(2)(2)
+                        TmpTileBoard(2)(2) = 0 }
+        }
+        TmpTileBoard
+    }
+
     /* isSolved() will return true if the
      * puzzel is solved
      */
@@ -148,6 +182,6 @@ object Puzzel {
         }
     }
 
-    def CopyBoard () = { TileBoard.clone}
+    def CopyBoard () = {TileBoard.clone}
 
 }

@@ -25,7 +25,8 @@ object Puzzel {
      */
     private def RandomizeTable() = {
         TileBoard(0)(0) = 1
-        TileBoard(0)(1) = 0
+        TileBoard(0)(1) = 4
+        TileBoard(1)(1) = 0
     }
 
     /* SanityCheck() just makes sure the user made a valid choice */
@@ -132,7 +133,6 @@ object Puzzel {
         var TmpTileBoard = TileBoard.map(_.clone)
         if (SanityCheck(tile) > 1) { // Check for valid tile move
                 println("ERROR invalid move: " + tile)
-                PrintBoard()
                 return Array.empty
             } 
         val tmpCord = searchArrays(0) // Look for zero tile, our empty space

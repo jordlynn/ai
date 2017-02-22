@@ -17,20 +17,26 @@ object Puzzel {
 
     }
 
-    RandomizeTable() 
-
-    /* RandomizeTable() Doesn't actuall randomize table, because it's possible
-     * to put together a table that isn't solvable. This just
-     * moves the tiles around a bunch.
+    /* RandomizeTable() This just moves the tiles 
+     * around a bunch.
      */
-    private def RandomizeTable() = {
-        TileBoard(0)(0) = 1
+    def RandomizeTable() = {
+        val randomMoves = scala.util.Random
+        var index = randomMoves.nextInt(50)
+        index += 2
+
+        while(index > 0) {
+            Puzzel.MoveTile(randomMoves.nextInt(8) + 1)
+            index -= 1
+        }
+
+/*        TileBoard(0)(0) = 1
         TileBoard(0)(1) = 4
-        TileBoard(1)(1) = 0
+        TileBoard(1)(1) = 0*/
     }
 
     /* SanityCheck() just makes sure the user made a valid choice */
-    private def SanityCheck (tileChoice: Int): Double = {
+    def SanityCheck (tileChoice: Int): Double = {
         var xVal: Int = 0
         var yVal: Int = 0
 
@@ -42,6 +48,7 @@ object Puzzel {
         yVal = zeroTuple(0)._2
 
         tileChoice match {
+
             case 1 => {
                 dxVal = 0
                 dyVal = 0
@@ -99,32 +106,32 @@ object Puzzel {
        */
     def MoveTile (tile: Int): Unit = {
         if (SanityCheck(tile) > 1) { // Check for valid tile move
-                println("ERROR invalid move!")
                 return 
-            } 
-        val tmpCord = searchArrays(0) // Look for zero tile, our empty space
-        
-        tile match {
-            case 1 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(0)(0)
-                        TileBoard(0)(0) = 0 }
-            case 2 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(0)(1)
-                        TileBoard(0)(1) = 0 }
-            case 3 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(0)(2)
-                        TileBoard(0)(2) = 0 }
+        } else {
+            val tmpCord = searchArrays(0) // Look for zero tile, our empty space
+            
+            tile match {
+                case 1 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(0)(0)
+                            TileBoard(0)(0) = 0 }
+                case 2 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(0)(1)
+                            TileBoard(0)(1) = 0 }
+                case 3 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(0)(2)
+                            TileBoard(0)(2) = 0 }
 
-            case 4 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(1)(0)
-                        TileBoard(1)(0) = 0 }
-            case 5 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(1)(1)
-                        TileBoard(1)(1) = 0 }
-            case 6 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(1)(2)
-                        TileBoard(1)(2) = 0 }
+                case 4 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(1)(0)
+                            TileBoard(1)(0) = 0 }
+                case 5 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(1)(1)
+                            TileBoard(1)(1) = 0 }
+                case 6 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(1)(2)
+                            TileBoard(1)(2) = 0 }
 
-            case 7 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(2)(0)
-                        TileBoard(2)(0) = 0 }
-            case 8 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(2)(1)
-                        TileBoard(2)(1) = 0 }
-            case 9 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(2)(2)
-                        TileBoard(2)(2) = 0 }
+                case 7 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(2)(0)
+                            TileBoard(2)(0) = 0 }
+                case 8 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(2)(1)
+                            TileBoard(2)(1) = 0 }
+                case 9 => { TileBoard(tmpCord(0)._1)(tmpCord(0)._2) = TileBoard(2)(2)
+                            TileBoard(2)(2) = 0 }
+            }
         }
     }
 
@@ -132,7 +139,7 @@ object Puzzel {
     def FindChildren (tile: Int): Array[Array[Int]] = {
         var TmpTileBoard = TileBoard.map(_.clone)
         if (SanityCheck(tile) > 1) { // Check for valid tile move
-                println("ERROR invalid move: " + tile)
+                //println("ERROR invalid move: " + tile)
                 return Array.empty
             } 
         val tmpCord = searchArrays(0) // Look for zero tile, our empty space

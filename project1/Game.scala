@@ -7,8 +7,16 @@ object Game {
     
     def main(args: Array[String]): Unit = {
 
-        var compPlayer = new Player("BFS")
-        val SolvedSeq = compPlayer.BreadthFirstSearch(Set(Puzzel.TileBoard), Seq.empty)
+        var compPlayerBFS = new Player("BFS")
+        var compPlayerDFS = new Player("BFS")
+        var compPlayerAstr = new Player("BFS")
+        Puzzel.RandomizeTable()
+        Puzzel.PrintBoard()
+        val tmpTileBoard = Puzzel.TileBoard.map(_.clone)
+
+        
+        
+    
 
 /*        while(!Puzzel.isSolved()) { 
         	println("Current position:")
@@ -21,10 +29,28 @@ object Game {
             //Puzzel.MoveTile(tmp)
 
         }*/
+        val SolvedSeqBFS = compPlayerBFS.BreadthFirstSearch(Set(Puzzel.TileBoard), Seq.empty)
+        Puzzel.TileBoard = tmpTileBoard
         print("Sequence to solve: ")
-        SolvedSeq.map(print(_))
+        SolvedSeqBFS.map(print(_))
+        println(" in " + SolvedSeqBFS.size + " moves")
+        println(" took " + compPlayerBFS.stepsTaken + " steps.")
+        SolvedSeqBFS.map(Puzzel.MoveTile(_))
 
-        SolvedSeq.map(Puzzel.MoveTile(_))
+        val SolvedSeqDFS = compPlayerDFS.DepthFirstSearch(Set(Puzzel.TileBoard), Seq.empty) 
+        Puzzel.TileBoard = tmpTileBoard
+        print("Sequence to solve: ")
+        SolvedSeqDFS.map(print(_))
+        println(" in " + SolvedSeqDFS.size + " moves")
+        println(" took " + compPlayerDFS.stepsTaken + " steps.")
+        SolvedSeqDFS.map(Puzzel.MoveTile(_))
+
+         val SolvedSeqAStr = compPlayerAstr.AstarSearch(Set(Puzzel.TileBoard), Seq.empty) 
+        print("Sequence to solve: ")
+        SolvedSeqAStr.map(print(_))
+        println(" in " + SolvedSeqAStr.size + " moves")
+        println(" took " + compPlayerAstr.stepsTaken + " steps.")
+        SolvedSeqAStr.map(Puzzel.MoveTile(_))
         
         println("\nSolved!")
         println()

@@ -1,0 +1,92 @@
+\documentclass[12pt,fleqn,leqno,letterpaper]{article}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage[margin=1in]{geometry}
+\pagestyle{fancy}
+\fancyhead{}
+\setlength{\headheight}{20pt} 
+\rhead{Jordan Lynn\\CS 470, Project 2a}
+
+
+\begin{document}
+Simple connect 4 program for two players, each player takes a turn at placing a tile, non number moves are handled by letting the player know that the move is invalid, number moves out of the bounds of the board are ignored. A regular game follows below with the invalid moves at the very end then finally a victory by Player 1.
+\begin{lstlisting}
+Player 2 : -, Player 1 : +, No value: o
+ooooooo
+ooooooo
+ooooooo
+ooooooo
+ooooooo
+ooooooo
+Column choice (0-6) : 1
+Player 2 : -, Player 1 : +, No value: o
+ooooooo
+ooooooo
+ooooooo
+ooooooo
+ooooooo
+o-ooooo
+Column choice (0-6) : 2
+Player 2 : -, Player 1 : +, No value: o
+ooooooo
+ooooooo
+ooooooo
+ooooooo
+ooooooo
+o-+oooo
+Column choice (0-6) : 1
+Player 2 : -, Player 1 : +, No value: o
+ooooooo
+ooooooo
+ooooooo
+ooooooo
+o-ooooo
+o-+oooo
+Column choice (0-6) : 2
+Player 2 : -, Player 1 : +, No value: o
+ooooooo
+ooooooo
+ooooooo
+ooooooo
+o-+oooo
+o-+oooo
+Column choice (0-6) : 1
+Player 2 : -, Player 1 : +, No value: o
+ooooooo
+ooooooo
+ooooooo
+o-ooooo
+o-+oooo
+o-+oooo
+Column choice (0-6) : 2
+Player 2 : -, Player 1 : +, No value: o
+ooooooo
+ooooooo
+ooooooo
+o-+oooo
+o-+oooo
+o-+oooo
+Column choice (0-6) : a
+Error not a valid number
+Column choice (0-6) : 99
+Column choice (0-6) : 0
+Player 2 : -, Player 1 : +, No value: o
+ooooooo
+ooooooo
+ooooooo
+o-+oooo
+o-+oooo
+--+oooo
+Column choice (0-6) : 2
+Player 2 : -, Player 1 : +, No value: o
+ooooooo
+ooooooo
+oo+oooo
+o-+oooo
+o-+oooo
+--+oooo
+Four in a row!
+Player Player 1 won.
+\end{lstlisting}
+
+\end{document}

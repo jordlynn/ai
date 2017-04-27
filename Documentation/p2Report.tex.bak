@@ -17,7 +17,9 @@ Minimax is a way to make decisions based on which player's turn it is, for ever 
 
 While the game is in progress we use a evalutation function that will assign Integer.MIN_VALUE to a state where the oppent wins, or the Integer.MAX_VALUE value if there's a state where AI can win. Otherwise we just add +1 for every disc in a row we have.\\
 
-Playing the game against the AI I do not believe it's possible to beat it without going to a futher depth in the state tree or `tricking' it if such a stratagy exists. The AI will always push the gamem towards a win for itself, and always try and block you from winning.
+Playing the game against the AI I do not believe it's possible to beat it without going to a futher depth in the state tree or `tricking' it if such a stratagy exists. The AI will always push the gamem towards a win for itself, and always try and block you from winning.\\
+
+Any improvments would entail maybe hard-coding some begining states into the AI that it should push for, currently it prioritizes playing to the middle of the board, but maybe there is additional strategy that could improve it. Also the AI doesn't attempt any `tricks' to decieve or beat its oppenent which when playing against itself results in the same game over and over again.
 \begin{lstlisting}
 
 \end{lstlisting}

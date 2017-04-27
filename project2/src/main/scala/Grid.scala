@@ -3,18 +3,18 @@ package com
 import com.Discs.Disc
 import com.GridStates._
 
-case class Grid private (	NumOfCol: Int,
-							NumOfRows: Int,
-							private val content:List[Option[Disc]],
-							state:GridState,
-							winningDisc:Option[Disc] ) {
+case class Grid private (   NumOfCol: Int,
+                            NumOfRows: Int,
+                            private val content:List[Option[Disc]],
+                            state:GridState,
+                            winningDisc:Option[Disc] ) {
 
-	def value(col: Int, row: Int): Option[Disc] = {
-		if (validCol(col) && validRow(row)) {
-			content(indexFor(col, row))
-		}
-		else throw new IllegalArgumentException(s"Invalid col and/or row: col: $col, row: $row.")
-	}
+    def value(col: Int, row: Int): Option[Disc] = {
+        if (validCol(col) && validRow(row)) {
+            content(indexFor(col, row))
+        }
+        else throw new IllegalArgumentException(s"Invalid col and/or row: col: $col, row: $row.")
+    }
 
 
   def value(cell:Cell): Option[Disc] =
@@ -40,11 +40,11 @@ case class Grid private (	NumOfCol: Int,
     } else
       throw new IllegalStateException(s"Dropping disc at col $col not possible.")
 
-	def cells : Seq[Cell] =
-	    for(
-	      col <- 0 until NumOfCol;
-	      row <- 0 until NumOfRows
-	    ) yield(Cell(col, row))
+    def cells : Seq[Cell] =
+        for(
+          col <- 0 until NumOfCol;
+          row <- 0 until NumOfRows
+        ) yield(Cell(col, row))
 
     private def winner(content:List[Option[Disc]], col:Int, row:Int, disc:Disc) : Boolean =
     winner(content, Grid.horizontal(col, row), disc) || 
@@ -52,19 +52,19 @@ case class Grid private (	NumOfCol: Int,
     winner(content, Grid.diagonalTopLeftToBottomRight(col, row), disc) || 
     winner(content, Grid.diagonalBottomLeftToTopRight(col, row), disc)
 
-	private def winner(content:List[Option[Disc]], cellArray:Array[Cell], disc:Disc):Boolean = {
-	    val cells = cellArray.foldLeft(List[Cell]())(
-	      (list, cell) =>
-	        if (list.length == 4)
-	          list
-	        else if (validCol(cell.col) && validRow(cell.row) && 
-	        		 (content(indexFor(cell.col, cell.row)) == Some(disc))
-	        		 )
-	          cell :: list
-	        else
-	          List()
-	    )
-	    cells.size == 4
+    private def winner(content:List[Option[Disc]], cellArray:Array[Cell], disc:Disc):Boolean = {
+        val cells = cellArray.foldLeft(List[Cell]())(
+          (list, cell) =>
+            if (list.length == 4)
+              list
+            else if (validCol(cell.col) && validRow(cell.row) && 
+                     (content(indexFor(cell.col, cell.row)) == Some(disc))
+                     )
+              cell :: list
+            else
+              List()
+        )
+        cells.size == 4
   }
 
   private def drop(col:Int, row:Int, disc:Disc): (List[Option[Disc]],Int) = {

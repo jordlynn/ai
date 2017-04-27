@@ -1,0 +1,36 @@
+\documentclass[12pt,fleqn,leqno,letterpaper]{article}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage[margin=1in]{geometry}
+\pagestyle{fancy}
+\fancyhead{}
+\setlength{\headheight}{20pt} 
+\rhead{Jordan Lynn\\CS 470, Project 2}
+
+
+\begin{document}
+For Project 2 I implemented a connect 4 board game both with a computer player and human player implementations. The human player uses whatever strategy or algorithm they'd like to play with on their own, while the computer will (probably) use a superior minimax algorithm with alpha-beta pruning. This is my second Scala project and so I'm striving to stay `idiomatic' while designing my program. For project 1 I was delayed in handing in due to just learning this new language, so setting out for this project I had the goal of `make everything an object' due to my last Scala project not having enough objects and I ended up cramming the objects with methods and fields that didn't belong there. Overall the project was a success, I have an AI that plays connect 4 and makes the `correct' choice every time to a certain depth, currently with our ten second limit imposed comes to a depth of about eight or nine. Once the program was in it's completed state I have yet to beat it, partially because if I as a player make a mistake the program has no problem directing the game towards a winning state for it, but also because it can be hard to read the game board sometimes.\\
+
+If I make the computer play against itself I initially didn't expect to have the same game run over and over again, but looking back of course that would be the result because there isn't any `randomness' to this game, so if I choose to have the computer play itself and both of these players have the same depth the game will either draw every time or one will win every time depending on which player went first and what depth they're searching to.\\
+
+Minimax is a way to make decisions based on which player's turn it is, for ever other level in the game state tree we either try and `-max'  our potential game state score or try to `Mini-' the score when it is our opponents score. This evaluation is simple and takes place in the `BetterEvaluation.scala' trait. To help speed up our algorithm and get it to better depth in the state tree I also implemented alpha-beta pruning. This process just reduces the number of nodes we search in the state tree. This preemptive pruning of the state tree allows us to search deeper in the tree, hopefully giving this algorithm an edge over others in class when we do the in class competition.\\
+
+While the game is in progress we use a evaluation function that will assign $Integer.MIN_VALUE$ to a state where the opponent wins, or the $Integer.MAX_VALUE$ value if there's a state where AI can win. Otherwise we just add $+1$ for every disc in a row we have.\\
+
+Playing the game against the AI I do not believe it's possible to beat it without going to a further depth in the state tree or `tricking' it if such a strategy exists. The AI will always push the game towards a win for itself, and always try and block you from winning.\\
+
+Any improvements would entail maybe hard-coding some beginning states into the AI that it should push for, currently it prioritizes playing to the middle of the board, but maybe there is additional strategy that could improve it. Also the AI doesn't attempt any `tricks' to deceive or beat its opponent which when playing against itself results in the same game over and over again.\pagebreak
+
+Now the scala code:
+
+\lstinputlisting[language=Scala, frame=single, breaklines=true]{../project2/src/main/scala/BetterEvaluation.scala}
+\lstinputlisting[language=Scala, frame=single, breaklines=true]{../project2/src/main/scala/Cell.scala}
+\lstinputlisting[language=Scala, frame=single, breaklines=true]{../project2/src/main/scala/ComputerPlayer.scala}
+\lstinputlisting[language=Scala, frame=single, breaklines=true]{../project2/src/main/scala/Player.scala}
+\lstinputlisting[language=Scala, frame=single, breaklines=true]{../project2/src/main/scala/Main.scala}
+\lstinputlisting[language=Scala, frame=single, breaklines=true]{../project2/src/main/scala/HumanPlayer.scala}
+\lstinputlisting[language=Scala, frame=single, breaklines=true]{../project2/src/main/scala/Grid.scala}
+\lstinputlisting[language=Scala, frame=single, breaklines=true]{../project2/src/main/scala/GrideStates.scala}
+\lstinputlisting[language=Scala, frame=single, breaklines=true]{../project2/src/main/scala/Evaluation.scala}
+\lstinputlisting[language=Scala, frame=single, breaklines=true]{../project2/src/main/scala/Disc.scala}
+\end{document}

@@ -15,16 +15,19 @@ import scala.io.StdIn
 class HumanPlayer(val name:String, val disc:Disc) extends Player {
   
   def next(grid: Grid): Int = {
-     if (grid.state != GameInProgress)
-     {
-    	 throw new IllegalStateException("Expected game to be still in progress.")
-	   }
+     if (grid.state != GameInProgress) {
+    	 throw new IllegalStateException("Game needs to be in progress!")
+        }
      var choice:Int = 0
-     do
-     {
-    	 printf("Column choice (0-"+(grid.NumOfCol-1)+") : ")
-    	 choice = StdIn.readInt()
-     
+     do {
+        printf("Column choice (0-"+(grid.NumOfCol-1)+") : ")
+        try{
+        	choice = StdIn.readInt()
+        } catch {
+            case e: Exception => println("Error not a valid number")
+            next(grid)
+        }
+        
      } while(grid.dropPossible(choice) == false)
      choice
   }
